@@ -164,7 +164,7 @@ label{
   text-decoration: underline;
   cursor: pointer;
 }
-@media screen and (max-width: 400px){
+@media screen and (max-width: 450px){
   .post-item{
     display: flex;
     flex-direction: column;
