@@ -12,7 +12,7 @@ export default function HomePage() {
         if (!password || !username) return alert("Please enter your username or password")
 
         let isError = false;
-        await axios.post("http://localhost:4000/api/v1/users/register", { username, password }).catch(err => {
+        await axios.post("https://talkblog-backend.onrender.com/api/v1/users/register", { username, password }).catch(err => {
             isError = true;
             return alert(err.response.data.message)
         })

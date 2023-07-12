@@ -13,7 +13,7 @@ export default function LoginPage() {
     const handleLogin = async (e) => {
         e.preventDefault();
 
-        const response = await axios.post("http://localhost:4000/api/v1/users/login", { username, password }).catch((err) => {
+        const response = await axios.post("https://talkblog-backend.onrender.com/api/v1/users/login", { username, password }).catch((err) => {
             alert(err.response.data.message);
         })
 

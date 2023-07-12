@@ -13,7 +13,7 @@ export default function CreatePost() {
         e.preventDefault();
         if (!content || !title || !summary) return alert("You must have a title, a summary, and content");
 
-        await axios.post("http://localhost:4000/api/v1/posts/", { title, content, summary }, {
+        await axios.post("https://talkblog-backend.onrender.com/api/v1/posts/", { title, content, summary }, {
             headers: {
                 Authorization: "Bearer " + localStorage.getItem("token")
             }

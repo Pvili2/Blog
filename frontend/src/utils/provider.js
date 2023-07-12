@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const provider = async (userContext) => {
 
-    await axios.post('http://localhost:4000/api/v1/users/provider', {}, {
+    await axios.post('https://talkblog-backend.onrender.com/api/v1/users/provider', {}, {
         headers: {
             Authorization: 'Bearer ' + localStorage.getItem('token'),
         }

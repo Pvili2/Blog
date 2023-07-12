@@ -5,7 +5,7 @@ import img from "../images/704031.jpg"
 
 export async function loader() {
 
-    const response = await axios.get("http://localhost:4000/api/v1/posts/getUserPosts", {
+    const response = await axios.get("https://talkblog-backend.onrender.com/api/v1/posts/getUserPosts", {
         headers: {
             Authorization: "Bearer " + localStorage.getItem("token"),
         }
