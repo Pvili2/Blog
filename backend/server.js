@@ -9,5 +9,5 @@ mongoose.connect("mongodb+srv://pvilmos2003:LpajSOHSNbNfsKih@cluster0.qoa9qcj.mo
 
 
 app.listen(4000, () => {
-    console.log('Server up')
+    console.log('Server up!')
 })
