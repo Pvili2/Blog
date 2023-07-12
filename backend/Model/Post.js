@@ -15,7 +15,7 @@ const postSchema = new Schema({
     },
     imageCover: String,
     publishedTime: {
-        type: Date,
+        type: String,
     },
     writer: {
         type: String,
