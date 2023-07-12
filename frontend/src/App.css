@@ -164,3 +164,53 @@ label{
   text-decoration: underline;
   cursor: pointer;
 }
+@media screen and (max-width: 400px){
+  .post-item{
+    display: flex;
+    flex-direction: column;
+  }
+  .content-body h2{
+    margin: 0;
+    font-size: 1.2rem;
+  }
+  .summary{
+    font-size: 15px;
+  }
+  header{
+    font-size: 1rem;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  form input {
+    display: flex;
+    width: 100%;
+    height: 50px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.5rem;
+  }
+  .single-post{
+    margin-top: 50px;
+    width: 90%;
+    display: flex;
+    gap: 10px;
+    margin: 0 auto;
+    flex-direction: column;
+    text-justify: inter-word;
+  }
+  .create-post{
+    width: 90%;
+    margin: 0 auto;
+    justify-self: center;
+  }
+  .create-post > form > input {
+    width: 100%;
+  }
+  .textEditor{
+    height: 300px;
+    margin-bottom: 60px;
+  }
+}

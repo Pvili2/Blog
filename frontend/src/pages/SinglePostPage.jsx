@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 
 export async function loader({ request }) {
-    console.log(request.url)
     const id = new URLSearchParams(request.url.split("?")[1]).get("id")
     if (!id) return null;
 
@@ -14,15 +13,15 @@ export async function loader({ request }) {
 }
 
 export default function SinglePostPage() {
-
+    const format = require("date-format")
     const post = useLoaderData();
+    const date = format("yyyy-MM-dd hh:mm", new Date(post.publishedTime))
 
-    console.log(post)
     return (
         <div className="single-post">
             <h1>{post.title}</h1>
             <div className="info">
-                <span>Author: <Link>{post.writer}</Link> | </span> <span> Last updated: {post.publishedTime.split("T")[0]} {post.publishedTime.split("T")[1].split('.')[0]}</span>
+                <span>Author: <Link>{post.writer}</Link> | </span> <span> Last updated: {date}</span>
             </div>
             <hr />
             <div className="blog-post">

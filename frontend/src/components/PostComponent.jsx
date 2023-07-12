@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router"
 import { Link } from "react-router-dom";
 
+
 export default function Post({ title, writer, created, id, image, summary, url }) {
 
+    const format = require("date-format")
     const navigate = useNavigate();
 
     if (summary.length > 160) {
@@ -17,6 +19,8 @@ export default function Post({ title, writer, created, id, image, summary, url }
     const handleClick = () => {
         navigate(`/post/${url}?id=${id}`)
     }
+
+    const date = format("yyyy-MM-dd hh:mm", new Date(created))
     return (
         <div className="post-item">
             <div className="image">
@@ -25,9 +29,9 @@ export default function Post({ title, writer, created, id, image, summary, url }
             <div className="content-body">
                 <h2 onClick={handleClick} className="title">{title}</h2>
                 <p className="info">
-                    <span>Author: <Link style={{ color: "#D3AC2B", textDecoration: "none" }} to={`/author/${writer}`}>{writer}</Link> | </span><span> Date: {created}</span>
+                    <span>Author: <Link style={{ color: "#D3AC2B", textDecoration: "none" }} to={`/author/${writer}`}>{writer}</Link> | </span><span> Date: {date}</span>
                 </p>
-                <p>{summary}</p>
+                <p className="summary">{summary}</p>
             </div>
         </div>
     )
