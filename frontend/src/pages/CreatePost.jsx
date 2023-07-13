@@ -1,13 +1,26 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import ReactQuill from "react-quill";
+import { useNavigate } from "react-router";
+import { UserContext } from "../components/UserContext";
+import { provider } from "../utils/provider";
 import 'react-quill/dist/quill.snow.css';
+
 
 export default function CreatePost() {
 
     const [content, setContent] = useState("");
     const [title, setTitle] = useState("");
     const [summary, setSummary] = useState("");
+    const userContext = useContext(UserContext)
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        provider(userContext);
+        userContext.userInfo.status !== "success" && navigate("/");
+    }, [])
+
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
