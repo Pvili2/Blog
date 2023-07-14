@@ -7,7 +7,7 @@ export async function loader({ request }) {
     const id = new URLSearchParams(request.url.split("?")[1]).get("id")
     if (!id) return null;
 
-    const response = await axios.get("https://talkblog-backend.onrender.com/api/v1/posts/" + id)
+    const response = await axios.get(process.env.REACT_APP_API_URL + "/api/v1/posts/" + id)
 
     return response?.data?.data;
 }

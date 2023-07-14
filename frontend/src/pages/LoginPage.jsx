@@ -18,7 +18,7 @@ export default function LoginPage() {
         setBtnDisabled(true)
         e.preventDefault();
 
-        const response = await axios.post("https://talkblog-backend.onrender.com/api/v1/users/login", { username, password }).catch((err) => {
+        const response = await axios.post(process.env.REACT_APP_API_URL + "/api/v1/users/login", { username, password }).catch((err) => {
             toast.error(err.response.data.message);
         })
 

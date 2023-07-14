@@ -14,7 +14,7 @@ export default function HomePage() {
         if (!password || !username) return toast.error("Please enter your username or password") && setBtnDisabled(false)
 
         let isError = false;
-        await axios.post("https://talkblog-backend.onrender.com/api/v1/users/register", { username, password }).catch(err => {
+        await axios.post(process.env.REACT_APP_API_URL + "/api/v1/users/register", { username, password }).catch(err => {
             isError = true;
         })
         if (isError) toast.error("Registration fail! 💥")

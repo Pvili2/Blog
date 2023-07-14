@@ -7,7 +7,7 @@ export async function loader({ request }) {
 
     const username = new URL(request.url).pathname.split('/')[2];
 
-    const response = await axios.get("https://talkblog-backend.onrender.com/api/v1/posts/getUserPosts/" + username)
+    const response = await axios.get(process.env.REACT_APP_API_URL + "/api/v1/posts/getUserPosts/" + username)
 
     return response?.data?.data;
 }

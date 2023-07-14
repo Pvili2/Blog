@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+dotenv.config({ path: './config.env' })
 const app = require('./app');
 
 mongoose.connect("mongodb+srv://pvilmos2003:LpajSOHSNbNfsKih@cluster0.qoa9qcj.mongodb.net/?retryWrites=true&w=majority").then(() => {
