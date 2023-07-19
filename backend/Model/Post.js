@@ -28,6 +28,9 @@ const postSchema = new Schema({
     summary: {
         type: String,
         required: [true, "The article must have a summary"]
+    },
+    comments: {
+        type: Array
     }
 
 })

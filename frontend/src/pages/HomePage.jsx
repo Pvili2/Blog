@@ -6,7 +6,6 @@ import img from "../images/704031.jpg"
 
 export async function loader() {
     const response = await axios.get(process.env.REACT_APP_API_URL + "/api/v1/posts/")
-
     return response?.data?.data;
 }
 

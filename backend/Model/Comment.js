@@ -16,6 +16,10 @@ const commentSchema = new Schema({
     }
 })
 
+commentSchema.pre('save', function () {
+    this.createdAt = Date.now();
+})
+
 const commentModel = model('Comment', commentSchema);
 
 module.exports = commentModel;

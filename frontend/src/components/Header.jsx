@@ -19,7 +19,7 @@ export default function Header() {
 
         <header>
             <div className="logo">
-                <NavLink style={({ isActive }) => isActive ? { color: "#D3AC2B" } : {}} to="/">TalkBlog</NavLink>
+                <NavLink style={({ isActive }) => isActive ? { color: "#D3AC2B", backgroundColor: "none" } : {}} to="/">TalkBlog</NavLink>
             </div>
             {userContext.userInfo.status === "success" && (
                 <nav>

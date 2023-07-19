@@ -7,6 +7,10 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Paper from '@mui/material/Paper';
+import InputBase from '@mui/material/InputBase';
+import IconButton from '@mui/material/IconButton';
+import SendIcon from '@mui/icons-material/Send';
 import { UserContext } from "../components/UserContext";
 
 export async function loader({ request }) {
@@ -20,11 +24,36 @@ export async function loader({ request }) {
 
 export default function SinglePostPage() {
     const userContext = useContext(UserContext)
-    console.log(userContext.userInfo)
     const format = require("date-format")
     const post = useLoaderData();
+    const comments = post.comments;
+
     const date = format("yyyy-MM-dd hh:mm", new Date(post.publishedTime))
-    const [showComments, setShowComments] = useState(false)
+    const [showComments, setShowComments] = useState(true)
+    const [message, setMessage] = useState("");
+
+    const handleChange = () => {
+        if (showComments) {
+            setShowComments(false);
+        } else {
+            setShowComments(true);
+        }
+    }
+
+    const handleCommentSending = async () => {
+        await axios.post(process.env.REACT_APP_API_URL + "/api/v1/comments", {
+            content: message,
+            id: post._id
+        }, {
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem("token"),
+            }
+        }).catch(err => console.log(err))
+
+
+        setMessage("");
+    }
+
     return (
         <div className="single-post">
             <h1>{post.title}</h1>
@@ -36,7 +65,7 @@ export default function SinglePostPage() {
                 <div style={{ textJustify: "inter-character", fontSize: "1.2rem" }} dangerouslySetInnerHTML={{ __html: post.content }}></div>
             </div>
             <hr />
-            <Accordion style={{ backgroundColor: "#B7C6D8" }}>
+            <Accordion expanded={showComments} onChange={handleChange} style={{ backgroundColor: "#B7C6D8" }}>
                 <AccordionSummary
                     aria-controls="panel1a-content"
                     id="panel1a-header"
@@ -46,16 +75,26 @@ export default function SinglePostPage() {
                 </AccordionSummary>
                 <AccordionDetails>
                     {userContext.userInfo.status === "success" && (
-                        <div>
-                            <form>
-                                <input type="textarea" style={{ width: "100%" }} placeholder="Comment..." />
-                                <button>Send</button>
-                            </form>
-                        </div>
+                        <Paper
+                            component="form"
+                            sx={{ display: 'flex', alignItems: 'center', flexDirection: "row" }}
+                        >
+                            <InputBase
+                                onChange={(e) => setMessage(e.target.value)}
+                                value={message}
+                                sx={{ ml: 1, flex: 1, borderRadius: "10px" }}
+                                placeholder="Write a comment..."
+
+                                inputProps={{ 'aria-label': 'search google maps' }}
+                            />
+                            <IconButton onClick={handleCommentSending} type="button" sx={{ p: '10px' }} aria-label="search">
+                                <SendIcon />
+                            </IconButton>
+                        </Paper>
                     )}
-                    <Comment key="1" />
-                    <Comment key="2" />
-                    <Comment key="3" />
+                    {comments && comments.map((comment, index) => {
+                        return <Comment key={index} content={comment.content} username={comment.username} createdAt={format("yyyy-MM-dd hh:mm", new Date(Number(comment.createdAt)))} />
+                    })}
                 </AccordionDetails>
             </Accordion>
 
@@ -63,11 +102,13 @@ export default function SinglePostPage() {
     )
 }
 
-function Comment() {
+function Comment({ content, username, createdAt }) {
     return (
         <div className="comment-item">
-            <div className="comment-author">Pvili2:</div>
-            Comment content
+            <div className="comment-author"><span>@{username} </span><span> {createdAt}</span></div>
+            <div>
+                {content}
+            </div>
         </div>
     )
 }
