@@ -1,4 +1,7 @@
 # Blog
+
+The project is under development!!!!!!!!!!
+
 MERN blog application
 
 It is a basic blogging site where user can write blog posts, comment and browse other people's blog posts!
